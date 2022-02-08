@@ -1,0 +1,22 @@
+- name: install tomcat service
+  hosts: node1
+  become: true
+  tasks:
+   - name: install java
+     apt:
+        name: openjdk-8-jdk
+        state: present
+   - name: download tomcat server package
+     get_url: 
+        url: https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.75/bin/apache-tomcat-8.5.75.tar.gz
+        dest: /usr/local
+        mode: 777
+        
+   - name: extract package
+     unarchive: 
+        src: /usr/local/apache-tomcat-8.5.75.tar.gz
+        dest: /usr/local
+        remote_src: yes
+   - name: start server
+     shell: nohup /usr/local/apache-tomcat-8.5.75/bin/startup.sh
+
