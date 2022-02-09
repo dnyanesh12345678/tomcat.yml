@@ -19,4 +19,18 @@
         remote_src: yes
    - name: start server
      shell: nohup /usr/local/apache-tomcat-8.5.75/bin/startup.sh
+   - name: give permission
+     shell: chmod 777  -R /usr/local/apache-tomcat-8.5.75
+   - name: copy file
+     copy:
+      src: shell.sh
+      dest: /home/ubuntu
+      mode: 777
+   - name: execute
+     shell: /home/ubuntu/shell.sh
+   - name: copy
+     copy:
+      src: /home/ubuntu/gamutkart2/target/gamutgurus.war
+      dest: /usr/local/apache-tomcat-8.5.75/webapps
+      remote_src: yes
 
