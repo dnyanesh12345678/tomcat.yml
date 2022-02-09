@@ -1,5 +1,5 @@
 - name: install tomcat service
-  hosts: node1
+  hosts: node2
   become: true
   tasks:
    - name: install java
